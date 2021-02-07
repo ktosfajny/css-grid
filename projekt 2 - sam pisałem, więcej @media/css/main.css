@@ -1,0 +1,103 @@
+* {
+  margin: 0;
+  padding: 0;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+body {
+  font-family: arial;
+  min-height: 100vh;
+  background-color: #161616;
+  color: black;
+}
+
+.grid {
+  max-width: 1200px;
+  margin: 0 auto;
+  min-height: inherit;
+  background-color: #333;
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: minmax(120px, 200px) minmax(240px, 1fr) 100px;
+      grid-template-columns: minmax(120px, 200px) minmax(240px, 1fr) 100px;
+  -ms-grid-rows: auto 1fr auto auto;
+      grid-template-rows: auto 1fr auto auto;
+      grid-template-areas: 'logo search menu' 'gallery gallery gallery' 'contact contact contact' 'footer footer footer';
+}
+
+@media (max-width: 840px) {
+  .grid {
+    -ms-grid-columns: minmax(120px, 200px) minmax(240px, 1fr);
+        grid-template-columns: minmax(120px, 200px) minmax(240px, 1fr);
+    -ms-grid-rows: auto auto 1fr auto auto;
+        grid-template-rows: auto auto 1fr auto auto;
+        grid-template-areas: 'logo search' 'menu menu' 'gallery gallery' 'contact contact' 'footer footer';
+  }
+}
+
+@media (max-width: 640px) {
+  .grid {
+    -ms-grid-columns: minmax(120px, 1fr);
+        grid-template-columns: minmax(120px, 1fr);
+    -ms-grid-rows: auto auto auto 1fr auto auto;
+        grid-template-rows: auto auto auto 1fr auto auto;
+        grid-template-areas: 'logo' 'search' 'menu' 'gallery' 'contact' 'footer';
+  }
+}
+
+.grid .logo {
+  -ms-grid-row: 1;
+  -ms-grid-column: 1;
+  grid-area: logo;
+  height: 80px;
+  background-color: #3a9fc0;
+}
+
+.grid .search {
+  -ms-grid-row: 1;
+  -ms-grid-column: 2;
+  grid-area: search;
+  background-color: #ff9999;
+}
+
+.grid .menu {
+  -ms-grid-row: 1;
+  -ms-grid-column: 3;
+  grid-area: menu;
+  background-color: #9999ff;
+}
+
+.grid .gallery {
+  background-color: #104310;
+  -ms-grid-row: 2;
+  -ms-grid-column: 1;
+  -ms-grid-column-span: 3;
+  grid-area: gallery;
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: (minmax(250px, 1fr))[auto-fill];
+      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 10px;
+}
+
+.grid .gallery img {
+  width: 100%;
+}
+
+.grid .contact {
+  -ms-grid-row: 3;
+  -ms-grid-column: 1;
+  -ms-grid-column-span: 3;
+  grid-area: contact;
+  background-color: #1f8dba;
+}
+
+.grid .footer {
+  -ms-grid-row: 4;
+  -ms-grid-column: 1;
+  -ms-grid-column-span: 3;
+  grid-area: footer;
+  background-color: #ff1aff;
+}
+/*# sourceMappingURL=main.css.map */

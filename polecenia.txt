@@ -1,0 +1,68 @@
+kontener:
+grid-template-columns: 60px auto 1fr;	<-- tworzy 3 kolumny: 1 ma szerokoœæ 60px, druga tylko tyle aby pomieœciæ kontent a 3 ma ca³¹ dostêpn¹ pozosta³¹ szerokoœæ
+grid-template-rows: 60px 60px;	<-- tworzy 2 wiersze
+grid-auto-flow: row;			<-- elementy uk³adane s¹ "wierszowo" czyli ¿e np element A jest 1 z lewej, B jest obok, C jest obok itd a jakby by³o "column" to B by³oby POD SPODEM A, C by³oby obok A, D by³oby pod C itd
+grid-auto-flow: row dense;			<-- przy uk³adaniu elementów w siatce mo¿e byæ tak ¿e np element D bêdzie po elemencie B jeœli np element C mia³ jawnie deklarowan¹ pozycjê 
+
+dziecko:
+grid-row: 1;	<-- zajmij 1 wiersz (grid-row to skrócona forma od grid-row-start i grid-row-end i mo¿na podaæ np grid: 1 / 2 albo grid-row: 1 )
+grid-column: 1/-1; 	<-- zacznij siê od 1 linii dla kolumn ale skoñcz siê na -1 linii dla kolumn czyli ostatniej a wiêc b¹dŸ szeroki na ca³¹ szerokosæ
+grid-row-end: span 2;	rozci¹gnij siê na 2 krotki
+
+
+grid-area: 1/2/3/4;		<-- to samo co grid-row-start: 1; grid-column-start: 2; grid row-end: 3; grid-column-end: 4;
+
+grid-column: 1 / span 5;	<-- zacznij siê w 1 kolumnie i rozci¹gnij na 5 kolumn (razem z t¹ 1)
+
+jak napiszesz:
+grid-column: 3;	
+	^-- to jest równowazne do: 
+	grid-column-start: 3;
+	grid-column-end: auto;	// <--- o jedn¹ liniê
+
+grid-column: 2/3;	
+	^-- to jest równowazne do: 
+	grid-column-start: 2;
+	grid-column-end: 3;	
+
+
+
+------- nazywanie krotek --------------------
+
+.grid{
+	display: grid;
+	grid-template-columns: 100px 1fr 3fr;
+	grid-template-columns: 100px auto auto;
+	
+	grid-template-areas:
+	"logo navitagion article"	// mo¿liwy jest te¿ zapis ".   .  article"  te kropki oznaczacj¹ ¿e te krokti nie maj¹ nazwy
+	"info info article"
+	"footer footer article";
+}
+
+.element1{
+	grid-area: article;
+}
+
+.element2{
+	grid-area: info;
+}
+.element3{
+	grid-area: footer;
+}
+
+
+
+----------------------------------------------
+
+
+grid-template-columns: repeat(4, 1fr); 	<-- stwórz 4 kolumny ka¿da o szerokoœci 1fr, 	
+grid-template-rows: repeat(3, 100px 15px); 	<-- stwórz 3 razy wiersze o wysokoœciach 100px i 15px (czyli razem bêdzie 6 wierszy)
+
+grid-template-columns: minmax(50px, 200px) 1fr 300px;	<-- stworzy 3 kolumny z których pierwsza jest responsywna tzn nie mo¿e byæ wê¿sza jak 50px ale mo¿e rosn¹æ a¿ do 200px
+grid-auto-rows: minmax(200px, auto);	<-- zwróæ uwagê ¿e tu jest AUTO-ROWS czyli dla wierszy tworzonych niejawnie (ty ich nie pisa³eœ przez tempalte-rows): jak zrobi siê nowy wiersz to niech ma conajmniej 200px a jak bêdzie wiêcej kontentu to niech roœnie ile potrzeba
+
+grid-template-columns: repeat(auto-fit, minmax(55px, 1fr));	<-- auto-fit to stwórz tyle kolumn ile jest elementów w tym tym samym wierszu i tyle ile jesteœ w stanie w oparciu o minmax()
+grid-template-columns: repeat(auto-fill, minmax(55px, 1fr));	<-- auto-fill stworzy tyle kolumn na ile pozwala minmax() ale jak np da siê wiecej ni¿ aktualnie jest elementów to zrób te dodatkowe puste kolumny
+
+generalnie auto-fit tworzy tyle kolumn/wierszy ile jest elementów to rozdysponowania a auto-fill tworzy tyle ile siê zmieœci czyli czêsto wiecej ni¿ jest elementów do rozdysponowania
